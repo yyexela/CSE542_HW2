@@ -69,7 +69,6 @@ def compute_losses(policy, qf, target_qf, obs_t, actions_t, rewards_t, next_obs_
     policy_loss = torch.Tensor(np.array([0])).to(device)
     qf_loss = torch.Tensor(np.array([0])).to(device)
 
-
     obs_t = torch.Tensor(obs_t).to(device)
     actions_t = torch.Tensor(actions_t).to(device)
     rewards_t = torch.Tensor(rewards_t).to(device)
@@ -84,10 +83,25 @@ def compute_losses(policy, qf, target_qf, obs_t, actions_t, rewards_t, next_obs_
     # Hint: Step 2: Compute the Q values as qf(obs_t, a_sampled_t)
     # Hint: Step 3: Policy loss is the mean over negative Q values
 
+    actions_pi, _, _ = policy(obs_t)
+    input_qf_1 = torch.cat([obs_t, actions_pi], dim=1)
+    q_actions_pi = qf(input_qf_1)
+    policy_loss = -1*torch.mean(q_actions_pi)
+
     # QF loss: 
     # Hint: Step 1: Compute q predictions using obs_t, actions_t
     # Hint: Step 2: Compute q targets using reward + target_qf for next_obs_t and new actions sampled from the policy
     # Hint: Step 3: Compute Bellman error as mean squared error between q_predictions and q_targets
+
+    input_qf_2 = torch.cat([obs_t, actions_t], dim=1)
+    q_actions = qf(input_qf_2)
+    with torch.no_grad():
+        next_action_pi, _, _ = policy(next_obs_t)
+        input_target_qf = torch.cat([next_obs_t, next_action_pi], dim=1)
+        target_q_values = target_qf(input_target_qf)
+        q_target = rewards_t + not_dones_t*discount*target_q_values
+
+    qf_loss = F.mse_loss(q_target, q_actions)
 
     # TODO END
 

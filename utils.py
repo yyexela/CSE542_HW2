@@ -80,11 +80,19 @@ class ACPolicy(nn.Module):
         return loc, std, log_std
 
     def dist_sample_no_postprocess(self, mu, std):
+        mu = mu.reshape(-1,1)
+        std = std.reshape(-1,1)
         action = torch.zeros((mu.shape[0], 1)).to(device)
+
         # TODO START
         # Hint: perform the reparameterization trick - action = mean + epsilon*std, where epsilon \sim N(0, I)
         # This will allow policy updates through gradient based updates via pathwise derivatives
+
+        z = torch.normal(torch.zeros_like(mu),torch.ones_like(mu)).to(device)
+        action = (z*std)+mu
+
         # TODO END
+
         return action
 
 
@@ -136,7 +144,7 @@ def collect_trajs(
         o_for_agent = o
 
         action, _, _ = agent(torch.Tensor(o_for_agent).unsqueeze(0).to(device))
-        action= action.cpu().detach().numpy()[0]
+        action = action.cpu().detach().numpy()[0]
 
         # Step the simulation forward
         next_o, r, done, env_info = env.step(copy.deepcopy(action))
