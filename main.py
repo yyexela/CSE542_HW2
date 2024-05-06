@@ -22,6 +22,7 @@ if __name__ == '__main__':
     parser.add_argument('--task', type=str, default='policy_gradient', help='choose task') # policy_gradient or actor_critic: policy_gradient by default
     parser.add_argument('--test', action='store_true', default=False) # T/F: F by default
     parser.add_argument('--render',  action='store_true', default=False) # T/F: F by default (keep as false probably)
+    parser.add_argument('--id',  default="0") # extra text identifying the run
     args = parser.parse_args()
     if args.render:
         import os
@@ -52,7 +53,7 @@ if __name__ == '__main__':
         if not args.test:
             # Train policy gradient
             simulate_policy_pg(env, policy, baseline, num_epochs=num_epochs, max_path_length=max_path_length, batch_size=batch_size,
-                            gamma=gamma, baseline_train_batch_size=baseline_train_batch_size, device = device, baseline_num_epochs=baseline_num_epochs, print_freq=print_freq, render=args.render)
+                            gamma=gamma, baseline_train_batch_size=baseline_train_batch_size, device = device, baseline_num_epochs=baseline_num_epochs, print_freq=print_freq, render=args.render, args=args)
             torch.save(policy.state_dict(), 'pg_final.pth')
         else:
             print('loading pretrained pg')
@@ -91,7 +92,7 @@ if __name__ == '__main__':
                                episode_length=episode_length,
                                num_epochs=num_epochs, batch_size=batch_size, num_update_steps=num_update_steps,
                                print_freq=print_freq,
-                               render=args.render)
+                               render=args.render, args=args)
             torch.save(policy.state_dict(), 'ac_final.pth')
         else:
             print('loading pretrained ac')

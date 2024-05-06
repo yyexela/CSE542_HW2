@@ -1,4 +1,5 @@
 import os
+import pickle
 import torch
 from torch import nn
 from torch import optim
@@ -65,7 +66,7 @@ class ReplayBuffer(object):
 
 
 
-def compute_losses(policy, qf, target_qf, obs_t, actions_t, rewards_t, next_obs_t, not_dones_t, device, discount=0.99):
+def compute_losses(policy, qf, target_qf, obs_t, actions_t, rewards_t, next_obs_t, not_dones_t, device, discount=0.99, args=None):
     policy_loss = torch.Tensor(np.array([0])).to(device)
     qf_loss = torch.Tensor(np.array([0])).to(device)
 
@@ -98,7 +99,10 @@ def compute_losses(policy, qf, target_qf, obs_t, actions_t, rewards_t, next_obs_
     with torch.no_grad():
         next_action_pi, _, _ = policy(next_obs_t)
         input_target_qf = torch.cat([next_obs_t, next_action_pi], dim=1)
-        target_q_values = target_qf(input_target_qf)
+        if args.id == 'notarget':
+            target_q_values = qf(input_target_qf)
+        else:
+            target_q_values = target_qf(input_target_qf)
         q_target = rewards_t + not_dones_t*discount*target_q_values
 
     qf_loss = F.mse_loss(q_target, q_actions)
@@ -128,11 +132,14 @@ def simulate_policy_ac(
         render = False,
         print_freq=10,
         learning_rate = 3e-4,
+        args=None
 ):
     env.reset()
 
     policy_optimizer = optim.Adam(policy.parameters(), lr=learning_rate)
     qf_optimizer = optim.Adam(qf.parameters(), lr=learning_rate)
+
+    rewards_list = list()
 
     # Copy parameters initially
     soft_update_target(qf, target_qf, 1.0)
@@ -145,16 +152,18 @@ def simulate_policy_ac(
             sample_traj = collect_trajs(env, policy, replay_buffer, device, episode_length=episode_length, render=render)
             sample_trajs.append(sample_traj)
 
+        rewards_np = np.mean(np.asarray([traj['rewards'].sum() for traj in sample_trajs]))
+        path_length = np.max(np.asarray([traj['rewards'].shape[0] for traj in sample_trajs]))
         if iter_num % print_freq == 0:
-            rewards_np = np.mean(np.asarray([traj['rewards'].sum() for traj in sample_trajs]))
-            path_length = np.max(np.asarray([traj['rewards'].shape[0] for traj in sample_trajs]))
             print("Episode: {}, reward: {}, max path length: {}".format(iter_num, rewards_np, path_length))
+        else:
+            rewards_list.append(rewards_np.item())
 
         for update_num in range(num_update_steps):
             obs_t, actions_t, rewards_t, next_obs_t, not_dones_t = replay_buffer.sample(batch_size)
 
             policy_loss, qf_loss = compute_losses(policy, qf, target_qf, obs_t, actions_t, rewards_t, next_obs_t,
-                                                  not_dones_t, device)
+                                                  not_dones_t, device, args=args)
 
             policy_optimizer.zero_grad()
             policy_loss.backward()
@@ -164,5 +173,8 @@ def simulate_policy_ac(
             qf_loss.backward()
             qf_optimizer.step()
 
-
             soft_update_target(qf, target_qf, target_weight)
+
+    # Save rewards
+    with open(f'./ac_rewards_{args.id}.pkl', 'rb') as f:
+        pickle.dump(rewards_list, f)

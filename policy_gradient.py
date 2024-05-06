@@ -1,4 +1,5 @@
 import os
+import pickle
 import torch
 import numpy as np
 from torch import nn
@@ -19,7 +20,7 @@ import matplotlib.pyplot as plt
 from utils import rollout, log_density
 
 def train_model(policy, baseline, trajs, policy_optim, baseline_optim, device, gamma=0.99, baseline_train_batch_size=64,
-                baseline_num_epochs=5):
+                baseline_num_epochs=5, args=None):
     # Fill in your policy gradient implementation here
     states_all = []
     actions_all = []
@@ -59,9 +60,12 @@ def train_model(policy, baseline, trajs, policy_optim, baseline_optim, device, g
     # TODO START
 
     # Hint: Just subtract mean and divide by (return.std() + EPS), where EPS is a small constant for numerics
-    eps = 1e-4
-    mean, std = np.mean(returns), np.std(returns)
-    returns = (returns-mean)/(std+eps)
+    if args.id == 'nonorm':
+        pass
+    else:
+        eps = 1e-4
+        mean, std = np.mean(returns), np.std(returns)
+        returns = (returns-mean)/(std+eps)
 
     # TODO END
 
@@ -120,9 +124,11 @@ def train_model(policy, baseline, trajs, policy_optim, baseline_optim, device, g
 
 # Training loop for policy gradient
 def simulate_policy_pg(env, policy, baseline, num_epochs=200, max_path_length=200, batch_size=100,
-                       gamma=0.99, baseline_train_batch_size=64, baseline_num_epochs=5, print_freq=10, device = "cuda", render=False):
+                       gamma=0.99, baseline_train_batch_size=64, baseline_num_epochs=5, print_freq=10, device = "cuda", render=False, args=None):
     policy_optim = optim.Adam(policy.parameters())
     baseline_optim = optim.Adam(baseline.parameters())
+
+    rewards_list = list()
 
     for iter_num in range(num_epochs):
         sample_trajs = []
@@ -137,12 +143,18 @@ def simulate_policy_pg(env, policy, baseline, num_epochs=200, max_path_length=20
             sample_trajs.append(sample_traj)
 
         # Logging returns occasionally
+        rewards_np = np.mean(np.asarray([traj['rewards'].sum() for traj in sample_trajs]))
+        path_length = np.max(np.asarray([traj['rewards'].shape[0] for traj in sample_trajs]))
         if iter_num % print_freq == 0:
-            rewards_np = np.mean(np.asarray([traj['rewards'].sum() for traj in sample_trajs]))
-            path_length = np.max(np.asarray([traj['rewards'].shape[0] for traj in sample_trajs]))
             print("Episode: {}, reward: {}, max path length: {}".format(iter_num, rewards_np, path_length))
+        else:
+            rewards_list.append(rewards_np.item())
 
         # Training model
         train_model(policy, baseline, sample_trajs, policy_optim, baseline_optim, device, gamma=gamma,
-                    baseline_train_batch_size=baseline_train_batch_size, baseline_num_epochs=baseline_num_epochs)
+                    baseline_train_batch_size=baseline_train_batch_size, baseline_num_epochs=baseline_num_epochs, args=args)
+
+    # Save rewards
+    with open(f'./pg_rewards_{args.id}.pkl', 'rb') as f:
+        pickle.dump(rewards_list, f)
 
