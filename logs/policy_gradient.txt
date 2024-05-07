@@ -1,0 +1,124 @@
+using device cuda
+Episode: 0, reward: 8.41, max path length: 23
+Episode: 10, reward: 11.68, max path length: 41
+Episode: 20, reward: 21.8, max path length: 71
+Episode: 30, reward: 45.19, max path length: 101
+Episode: 40, reward: 112.46, max path length: 200
+Episode: 50, reward: 122.75, max path length: 146
+Episode: 60, reward: 169.7, max path length: 200
+Episode: 70, reward: 188.57, max path length: 200
+Episode: 80, reward: 197.48, max path length: 200
+Episode: 90, reward: 196.33, max path length: 200
+Episode: 100, reward: 194.9, max path length: 200
+Episode: 110, reward: 193.01, max path length: 200
+Episode: 120, reward: 196.08, max path length: 200
+Episode: 130, reward: 193.83, max path length: 200
+Episode: 140, reward: 198.59, max path length: 200
+Episode: 150, reward: 196.42, max path length: 200
+Episode: 160, reward: 199.95, max path length: 200
+Episode: 170, reward: 195.87, max path length: 200
+Episode: 180, reward: 198.87, max path length: 200
+Episode: 190, reward: 198.98, max path length: 200
+test 0, success True, reward 200.0
+test 1, success True, reward 200.0
+test 2, success True, reward 200.0
+test 3, success True, reward 200.0
+test 4, success True, reward 200.0
+test 5, success True, reward 200.0
+test 6, success True, reward 200.0
+test 7, success True, reward 200.0
+test 8, success True, reward 200.0
+test 9, success True, reward 200.0
+test 10, success True, reward 200.0
+test 11, success True, reward 200.0
+test 12, success True, reward 200.0
+test 13, success True, reward 200.0
+test 14, success True, reward 200.0
+test 15, success True, reward 200.0
+test 16, success True, reward 200.0
+test 17, success True, reward 200.0
+test 18, success True, reward 200.0
+test 19, success True, reward 200.0
+test 20, success True, reward 200.0
+test 21, success True, reward 200.0
+test 22, success True, reward 200.0
+test 23, success True, reward 200.0
+test 24, success True, reward 200.0
+test 25, success True, reward 200.0
+test 26, success True, reward 200.0
+test 27, success True, reward 200.0
+test 28, success True, reward 200.0
+test 29, success True, reward 200.0
+test 30, success True, reward 200.0
+test 31, success True, reward 200.0
+test 32, success True, reward 200.0
+test 33, success True, reward 200.0
+test 34, success True, reward 200.0
+test 35, success True, reward 200.0
+test 36, success True, reward 200.0
+test 37, success True, reward 200.0
+test 38, success True, reward 200.0
+test 39, success True, reward 200.0
+test 40, success True, reward 200.0
+test 41, success True, reward 200.0
+test 42, success True, reward 200.0
+test 43, success True, reward 200.0
+test 44, success True, reward 200.0
+test 45, success True, reward 200.0
+test 46, success True, reward 200.0
+test 47, success True, reward 200.0
+test 48, success True, reward 200.0
+test 49, success True, reward 200.0
+test 50, success True, reward 200.0
+test 51, success False, reward 197.0
+test 52, success True, reward 200.0
+test 53, success True, reward 200.0
+test 54, success False, reward 172.0
+test 55, success True, reward 200.0
+test 56, success True, reward 200.0
+test 57, success True, reward 200.0
+test 58, success True, reward 200.0
+test 59, success True, reward 200.0
+test 60, success True, reward 200.0
+test 61, success True, reward 200.0
+test 62, success True, reward 200.0
+test 63, success True, reward 200.0
+test 64, success True, reward 200.0
+test 65, success True, reward 200.0
+test 66, success True, reward 200.0
+test 67, success True, reward 200.0
+test 68, success True, reward 200.0
+test 69, success True, reward 200.0
+test 70, success True, reward 200.0
+test 71, success True, reward 200.0
+test 72, success True, reward 200.0
+test 73, success True, reward 200.0
+test 74, success True, reward 200.0
+test 75, success True, reward 200.0
+test 76, success True, reward 200.0
+test 77, success True, reward 200.0
+test 78, success True, reward 200.0
+test 79, success True, reward 200.0
+test 80, success True, reward 200.0
+test 81, success True, reward 200.0
+test 82, success True, reward 200.0
+test 83, success True, reward 200.0
+test 84, success True, reward 200.0
+test 85, success True, reward 200.0
+test 86, success True, reward 200.0
+test 87, success True, reward 200.0
+test 88, success True, reward 200.0
+test 89, success True, reward 200.0
+test 90, success False, reward 189.0
+test 91, success True, reward 200.0
+test 92, success True, reward 200.0
+test 93, success True, reward 200.0
+test 94, success True, reward 200.0
+test 95, success True, reward 200.0
+test 96, success True, reward 200.0
+test 97, success True, reward 200.0
+test 98, success True, reward 200.0
+test 99, success True, reward 200.0
+Success rate:  0.97
+Average reward (success only):  200.0
+Average reward (all):  199.58

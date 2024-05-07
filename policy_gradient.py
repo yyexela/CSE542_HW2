@@ -155,6 +155,6 @@ def simulate_policy_pg(env, policy, baseline, num_epochs=200, max_path_length=20
                     baseline_train_batch_size=baseline_train_batch_size, baseline_num_epochs=baseline_num_epochs, args=args)
 
     # Save rewards
-    with open(f'./pg_rewards_{args.id}.pkl', 'rb') as f:
+    with open(f'./pickle/pg_rewards_{args.id}.pkl', 'wb') as f:
         pickle.dump(rewards_list, f)
 

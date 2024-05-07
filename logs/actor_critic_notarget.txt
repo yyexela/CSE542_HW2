@@ -1,0 +1,124 @@
+using device cuda
+Episode: 0, reward: 8.234375, max path length: 27
+Episode: 10, reward: 1.0625, max path length: 2
+Episode: 20, reward: 1.078125, max path length: 3
+Episode: 30, reward: 1.140625, max path length: 2
+Episode: 40, reward: 2.609375, max path length: 6
+Episode: 50, reward: 41.734375, max path length: 44
+Episode: 60, reward: 4.0, max path length: 4
+Episode: 70, reward: 14.515625, max path length: 18
+Episode: 80, reward: 23.828125, max path length: 29
+Episode: 90, reward: 45.78125, max path length: 90
+Episode: 100, reward: 7.75, max path length: 9
+Episode: 110, reward: 48.25, max path length: 82
+Episode: 120, reward: 188.6875, max path length: 200
+Episode: 130, reward: 29.375, max path length: 32
+Episode: 140, reward: 40.078125, max path length: 45
+Episode: 150, reward: 33.359375, max path length: 37
+Episode: 160, reward: 34.625, max path length: 38
+Episode: 170, reward: 37.875, max path length: 42
+Episode: 180, reward: 51.484375, max path length: 57
+Episode: 190, reward: 107.046875, max path length: 110
+test 0, success False, reward 16.0
+test 1, success False, reward 16.0
+test 2, success False, reward 16.0
+test 3, success False, reward 17.0
+test 4, success False, reward 15.0
+test 5, success False, reward 17.0
+test 6, success False, reward 16.0
+test 7, success False, reward 17.0
+test 8, success False, reward 16.0
+test 9, success False, reward 16.0
+test 10, success False, reward 16.0
+test 11, success False, reward 16.0
+test 12, success False, reward 15.0
+test 13, success False, reward 17.0
+test 14, success False, reward 17.0
+test 15, success False, reward 16.0
+test 16, success False, reward 17.0
+test 17, success False, reward 16.0
+test 18, success False, reward 17.0
+test 19, success False, reward 15.0
+test 20, success False, reward 16.0
+test 21, success False, reward 17.0
+test 22, success False, reward 17.0
+test 23, success False, reward 16.0
+test 24, success False, reward 17.0
+test 25, success False, reward 16.0
+test 26, success False, reward 17.0
+test 27, success False, reward 17.0
+test 28, success False, reward 16.0
+test 29, success False, reward 15.0
+test 30, success False, reward 17.0
+test 31, success False, reward 17.0
+test 32, success False, reward 15.0
+test 33, success False, reward 16.0
+test 34, success False, reward 16.0
+test 35, success False, reward 17.0
+test 36, success False, reward 15.0
+test 37, success False, reward 16.0
+test 38, success False, reward 16.0
+test 39, success False, reward 15.0
+test 40, success False, reward 15.0
+test 41, success False, reward 15.0
+test 42, success False, reward 16.0
+test 43, success False, reward 16.0
+test 44, success False, reward 17.0
+test 45, success False, reward 16.0
+test 46, success False, reward 15.0
+test 47, success False, reward 16.0
+test 48, success False, reward 15.0
+test 49, success False, reward 15.0
+test 50, success False, reward 16.0
+test 51, success False, reward 15.0
+test 52, success False, reward 15.0
+test 53, success False, reward 16.0
+test 54, success False, reward 16.0
+test 55, success False, reward 15.0
+test 56, success False, reward 16.0
+test 57, success False, reward 16.0
+test 58, success False, reward 17.0
+test 59, success False, reward 16.0
+test 60, success False, reward 17.0
+test 61, success False, reward 15.0
+test 62, success False, reward 17.0
+test 63, success False, reward 16.0
+test 64, success False, reward 17.0
+test 65, success False, reward 15.0
+test 66, success False, reward 16.0
+test 67, success False, reward 17.0
+test 68, success False, reward 17.0
+test 69, success False, reward 17.0
+test 70, success False, reward 15.0
+test 71, success False, reward 17.0
+test 72, success False, reward 17.0
+test 73, success False, reward 15.0
+test 74, success False, reward 17.0
+test 75, success False, reward 17.0
+test 76, success False, reward 16.0
+test 77, success False, reward 15.0
+test 78, success False, reward 17.0
+test 79, success False, reward 16.0
+test 80, success False, reward 15.0
+test 81, success False, reward 15.0
+test 82, success False, reward 16.0
+test 83, success False, reward 17.0
+test 84, success False, reward 17.0
+test 85, success False, reward 16.0
+test 86, success False, reward 16.0
+test 87, success False, reward 15.0
+test 88, success False, reward 16.0
+test 89, success False, reward 16.0
+test 90, success False, reward 17.0
+test 91, success False, reward 15.0
+test 92, success False, reward 15.0
+test 93, success False, reward 16.0
+test 94, success False, reward 15.0
+test 95, success False, reward 17.0
+test 96, success False, reward 16.0
+test 97, success False, reward 17.0
+test 98, success False, reward 17.0
+test 99, success False, reward 17.0
+Success rate:  0.0
+Average reward (success only):  0.0
+Average reward (all):  16.09

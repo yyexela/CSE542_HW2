@@ -176,5 +176,5 @@ def simulate_policy_ac(
             soft_update_target(qf, target_qf, target_weight)
 
     # Save rewards
-    with open(f'./ac_rewards_{args.id}.pkl', 'rb') as f:
+    with open(f'./pickle/ac_rewards_{args.id}.pkl', 'wb') as f:
         pickle.dump(rewards_list, f)
